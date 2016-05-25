@@ -2,7 +2,8 @@
 
 用C语言编写的一些小游戏，在linux下gcc编译通过
 
-1. Plane_War(飞机小游戏)
+- Plane_War(飞机小游戏)
+- Snake(贪吃蛇)
 
 用到的库
 
