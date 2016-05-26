@@ -15,10 +15,12 @@
 ## 游戏截图
 
 Plane_War
-[plane_war.jpg](http://7xkt5c.com1.z0.glb.clouddn.com/plane_war.jpg)
+
+![plane_war.jpg](http://7xkt5c.com1.z0.glb.clouddn.com/plane_war.jpg)
 
 Snake
-[snake.jpg](http://7xkt5c.com1.z0.glb.clouddn.com/snake.jpg)
+
+![snake.jpg](http://7xkt5c.com1.z0.glb.clouddn.com/snake.jpg)
 
 
 
