@@ -35,6 +35,7 @@ void MoveEnemy();//敌军移动
 void MoveBullet();//子弹移动
 void Refresh();//刷新显示
 void DisplayScore();//显示得分
+void DisplayInstructions();//显示说明
 void GameOver();//游戏结束
 
 int main()
@@ -186,6 +187,7 @@ void Refresh()
     } 
     mvprintw(s_planeYPos, s_planeXPos, "%c", PLANE_SYMBOL);//显示飞机 
     DisplayScore();//显示得分
+    DisplayInstructions();//显示说明
 }
 
 //显示得分
@@ -193,16 +195,18 @@ void DisplayScore()
 {
     mvprintw(0, WIDTH + 1, "KILL: %d.", s_killNumber);
     mvprintw(2, WIDTH + 1, "SCORE: %d.", s_killNumber * 10);
+}
+
+void DisplayInstructions()
+{
+    mvprintw(s_row - 3, WIDTH + 1, "Shoot: space key");
+    mvprintw(s_row - 2, WIDTH + 1, "Move: direction key");
     mvprintw(s_row - 1, WIDTH + 1, "%s", "Press ESC to exit");
-    
 }
 
 void GameOver()
 {
-    clear();
-    mvprintw(s_row/2, s_col/3, "%s", "GAME OVER.");
-    mvprintw(s_row/2 + 3, s_col/3, "YOU KILL %d.", s_killNumber);
-    mvprintw(s_row/2 + 4, s_col/3, "YOUR SCORE:%d.", s_killNumber * 10);
+    mvprintw(s_row/2, s_col/2, "%s", "GAME OVER.");
     timeout(-1);
     getch();
     endwin();
