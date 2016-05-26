@@ -12,7 +12,6 @@
 #define WIDTH 20//蛇可以移动的宽度
 #define HEIGHT 15//蛇可以移动的高度
 
-char g_screen[HEIGHT + 2][WIDTH + 2] = {0};
 
 //蛇的结点
 struct Node{
@@ -37,14 +36,17 @@ struct Food{
     int y;
 };
 
+char g_screen[HEIGHT + 2][WIDTH + 2] = {0};
+
 struct Food g_food;
 struct Snake g_snake;
 
 int g_direction = RIGHT;//蛇的方向，一开始默认为右
 int g_speed = 200;//蛇的移动速度,越大越慢
+int g_eatFoodNum = 0;
 
-int g_row;
 int g_col;
+int g_row;
 
 void Init();//初始化
 pNode CreateNode(int x, int y);
@@ -58,6 +60,7 @@ void MoveSnake();//蛇移动
 void GenerateFood();//随机生成食物
 void Refresh();//刷新界面
 void DisPlayBorder();//显示边界
+void DisPlayScore(int y, int x);//显示得分
 void GameOver();//游戏结束
 
 
@@ -116,6 +119,7 @@ void Init()
     initscr();//初始化terminal处于curses模式 
     curs_set(0);//光标不可见
     keypad(stdscr, TRUE);//使能键盘读取函数能够读到F1,F2和方向键
+    getmaxyx(stdscr,g_row,g_col);
     //nodelay(stdscr, TRUE);
     timeout(1);//键盘读取超时, 1ms
 
@@ -192,6 +196,9 @@ void MoveSnakeBody()
 
 void GameOver()
 {
+    mvprintw(g_row/2, g_col/2, "%s.", "GAME OVER");
+    timeout(-1);
+    getch();
     endwin();
     exit(0); 
 }
@@ -201,6 +208,7 @@ void HandleMoveEvent(int nextX, int nextY)
     pNode pn;
     if(IsRearchFood(nextX, nextY)){
         //吃到食物
+        g_eatFoodNum += 1;
         pn = CreateNode(nextX, nextY);     
         AddSnakeHead(pn);//将新结点作为新头部,蛇身体无需移动
         GenerateFood();
@@ -296,11 +304,18 @@ void DisPlayBorder()
     }
 }
 
+void DisPlayScore(int y, int x)
+{
+    mvprintw(y, x, "eat %d food.\n", g_eatFoodNum);
+    mvprintw(y + 2, x, "score : %d.\n", g_eatFoodNum * 10);
+}
+
 void Refresh()
 {
     pNode pn = g_snake.tail;
     clear();
     DisPlayBorder();//显示边界
+    DisPlayScore(0, WIDTH + 5);//显示得分
     mvprintw(g_food.y, g_food.x, "%c", '$');//显示食物    
     //显示蛇
     while(pn != NULL){
