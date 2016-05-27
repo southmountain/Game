@@ -183,9 +183,9 @@ void Refresh()
     for(i = 0;i < s_row * s_col;i++){
          xPos = i % s_col;
          yPos = i / s_col;
-         mvprintw(yPos, xPos, "%c", s_layoutSymbol[s_layout[i]]); 
+         mvaddch(yPos, xPos, s_layoutSymbol[s_layout[i]]);
     } 
-    mvprintw(s_planeYPos, s_planeXPos, "%c", PLANE_SYMBOL);//显示飞机 
+    mvaddch(s_planeYPos, s_planeXPos, PLANE_SYMBOL);//显示飞机
     DisplayScore();//显示得分
     DisplayInstructions();//显示说明
 }
@@ -201,7 +201,7 @@ void DisplayInstructions()
 {
     mvprintw(s_row - 3, WIDTH + 1, "Shoot: space key");
     mvprintw(s_row - 2, WIDTH + 1, "Move: direction key");
-    mvprintw(s_row - 1, WIDTH + 1, "%s", "Press ESC to exit");
+    mvprintw(s_row - 1, WIDTH + 1, "Press ESC to exit");
 }
 
 void GameOver()
