@@ -196,6 +196,13 @@ void MoveSnakeBody()
 
 void GameOver()
 {
+    pNode t;
+    pNode pn = g_snake.tail;
+    while(pn != NULL){
+        t = pn;
+        pn = pn->next; 
+        free(t);
+    }
     mvprintw(g_row/2, g_col/2, "%s.", "GAME OVER");
     timeout(-1);
     getch();

@@ -207,6 +207,7 @@ void DisplayInstructions()
 void GameOver()
 {
     mvprintw(s_row/2, s_col/2, "%s", "GAME OVER.");
+    free(s_layout);
     timeout(-1);
     getch();
     endwin();

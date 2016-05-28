@@ -83,6 +83,7 @@ int main()
         DisPlayBird(pb);
         DisplayPipe(pipePairs, PIPE_NUM);
         if(IsHitPipe(pb, pipePairs, PIPE_NUM) || IsHitBorder(pb)){
+            free(pb);
             GameOver(); 
         }
     }
